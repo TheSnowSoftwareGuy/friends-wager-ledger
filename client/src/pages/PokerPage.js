@@ -24,8 +24,8 @@ function PokerPage() {
     try {
       setLoading(true);
       const [sessionsRes, usersRes] = await Promise.all([
-        axios.get('/api/poker/sessions'),
-        axios.get('/api/users')
+        axios.get('https://friends-wager-ledger.onrender.com/api/poker/sessions'),
+        axios.get('https://friends-wager-ledger.onrender.com/api/users')
       ]);
       setSessions(sessionsRes.data);
       setUsers(usersRes.data);
@@ -44,7 +44,7 @@ function PokerPage() {
         return;
       }
 
-      await axios.post('/api/poker/sessions', { session_name: newSessionName.trim() });
+      await axios.post('https://friends-wager-ledger.onrender.com/api/poker/sessions', { session_name: newSessionName.trim() });
       toast.success('Session created successfully');
       setCreateDialogOpen(false);
       setNewSessionName('');

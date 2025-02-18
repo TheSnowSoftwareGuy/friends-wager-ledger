@@ -29,8 +29,8 @@ function PokerSessionPage() {
     try {
       setLoading(true);
       const [sessionRes, usersRes] = await Promise.all([
-        axios.get(`/api/poker/sessions/${sessionId}`),
-        axios.get('/api/users')
+        axios.get(`https://friends-wager-ledger.onrender.com/api/poker/sessions/${sessionId}`),
+        axios.get('https://friends-wager-ledger.onrender.com/api/users')
       ]);
       setSession(sessionRes.data);
       // Initialize finalChips state with existing values
@@ -59,7 +59,7 @@ function PokerSessionPage() {
         return;
       }
 
-      await axios.post(`/api/poker/sessions/${sessionId}/players`, newPlayer);
+      await axios.post(`https://friends-wager-ledger.onrender.com/api/poker/sessions/${sessionId}/players`, newPlayer);
       toast.success('Player added successfully');
       setAddPlayerDialogOpen(false);
       setNewPlayer({ user_id: '', buy_in_amount: '' });
@@ -82,14 +82,14 @@ function PokerSessionPage() {
       // Save all chip values
       await Promise.all(
         Object.entries(finalChips).map(([playerId, chips]) =>
-          axios.put(`/api/poker/sessions/${sessionId}/players/${playerId}`, {
+          axios.put(`https://friends-wager-ledger.onrender.com/api/poker/sessions/${sessionId}/players/${playerId}`, {
             final_chips: chips
           })
         )
       );
 
       // Calculate settlements
-      const response = await axios.get(`/api/poker/sessions/${sessionId}/recommendations`);
+      const response = await axios.get(`https://friends-wager-ledger.onrender.com/api/poker/sessions/${sessionId}/recommendations`);
       setSettlements(response.data);
       setShowNetValues(true);
       setSettlementsProcessed(true);
@@ -106,7 +106,7 @@ function PokerSessionPage() {
       
       // Create bets for each settlement
       await Promise.all(settlements.map(settlement => 
-        axios.post('/api/bets', {
+        axios.post('https://friends-wager-ledger.onrender.com/api/bets', {
           user_id: settlement.from_user_id,
           opponent_id: settlement.to_user_id,
           wager_type: `Poker Session: ${session.session_name}`,

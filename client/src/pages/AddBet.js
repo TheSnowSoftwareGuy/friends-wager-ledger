@@ -28,7 +28,7 @@ function AddBet() {
     const fetchUsers = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('/api/users');
+        const response = await axios.get('https://friends-wager-ledger.onrender.com/api/users');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -73,7 +73,7 @@ function AddBet() {
 
     try {
       setSubmitting(true);
-      await axios.post('/api/bets', {
+      await axios.post('https://friends-wager-ledger.onrender.com/api/bets', {
         ...formData,
         amount: parseFloat(formData.amount)
       });

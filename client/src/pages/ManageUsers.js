@@ -21,7 +21,7 @@ function ManageUsers() {
     try {
       setLoading(true);
       setError(null);
-      const response = await axios.get('/api/users');
+      const response = await axios.get('https://friends-wager-ledger.onrender.com/api/users'); // Changed to use the deployed backend
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -42,7 +42,7 @@ function ManageUsers() {
 
     try {
       setSubmitting(true);
-      await axios.post('/api/users', { name: newUserName.trim() });
+      await axios.post('https://friends-wager-ledger.onrender.com/api/users', { name: newUserName.trim() });
       toast.success('User added successfully');
       setNewUserName('');
       fetchUsers();

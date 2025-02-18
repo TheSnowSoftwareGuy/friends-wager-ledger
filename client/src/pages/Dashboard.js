@@ -35,8 +35,8 @@ function Dashboard() {
         setLoading(true);
         setError(null);
         const [betsResponse, balancesResponse] = await Promise.all([
-          axios.get('/api/bets'),
-          axios.get('/api/users/balances')
+          axios.get('https://friends-wager-ledger.onrender.com/api/bets'),
+          axios.get('https://friends-wager-ledger.onrender.com/api/users/balances')
         ]);
         setBets(betsResponse.data);
         setBalances(balancesResponse.data);
@@ -96,13 +96,13 @@ function Dashboard() {
 
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`/api/bets/${deletingBet.id}`);
+      await axios.delete(`https://friends-wager-ledger.onrender.com/api/bets/${deletingBet.id}`);
       toast.success('Bet deleted successfully');
       
       // Refresh the data
       const [betsResponse, balancesResponse] = await Promise.all([
-        axios.get('/api/bets'),
-        axios.get('/api/users/balances')
+        axios.get('https://friends-wager-ledger.onrender.com/api/bets'),
+        axios.get('https://friends-wager-ledger.onrender.com/api/users/balances')
       ]);
       setBets(betsResponse.data);
       setBalances(balancesResponse.data);
@@ -124,7 +124,7 @@ function Dashboard() {
       const month = settlementDate.getMonth() + 1;
       const year = settlementDate.getFullYear();
       
-      const response = await axios.get(`/api/settlements/monthly?month=${month}&year=${year}`);
+      const response = await axios.get(`https://friends-wager-ledger.onrender.com/api/settlements/monthly?month=${month}&year=${year}`);
       setMonthlySettlement(response.data);
       setSettlementDialogOpen(true);
     } catch (error) {
