@@ -1,0 +1,66 @@
+# --------------------
+# 1. OS / Editor / System Files
+# --------------------
+.DS_Store
+Thumbs.db
+
+# --------------------
+# 2. Node / NPM Logs
+# --------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --------------------
+# 3. Node Modules (Client & Server)
+# --------------------
+client/node_modules/
+server/node_modules/
+
+# --------------------
+# 4. Build Outputs (Client)
+#    (If using Create React App or similar)
+# --------------------
+client/build/
+client/dist/
+
+# --------------------
+# 5. Env Files (Server)
+# --------------------
+server/.env
+server/.env.local
+server/.env.development
+server/.env.production
+server/.env.*.local
+
+# --------------------
+# 6. Logs & Coverage (Server)
+# --------------------
+server/logs/
+server/coverage/
+
+# --------------------
+# 7. Ignore nested Git repository in client
+# --------------------
+client/.git/
+
+# --------------------
+# 8. Partial Ignore of .cursor Directory
+#    - Ignore all .cursor except .cursor/rules and its contents
+# --------------------
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/*
+
+# If you want to ignore the entire .cursor folder (including rules), remove the above "!" lines
+# and just do:
+# .cursor/
+
+# --------------------
+# 9. Misc
+# --------------------
+# Ignore local environment / config files at root, if any
+.env
+.env.local
+.env.*

@@ -1,0 +1,99 @@
+---
+description:   This rule instructs Cursor’s Cascade to generate a complete full-stack application consisting of:   - A React frontend (using Create-React-App or Vite)   - A Node.js/Express backend   - A PostgreSQL database with a schema for users and bets     The application tracks wagers between friends, supports CRUD operations, and is ready for deployment on Render.
+globs: **/*
+---
+# Project Cursorrules for Friends Wager Ledger
+
+## Overview
+This project is a full-stack ledger application to track wagers among friends. The existing scaffold (React client and Node/Express server, along with `schema.sql` and base configuration) must be enhanced into a production-ready application that supports full CRUD operations, a modern UI, and deployment on Render.
+
+---
+
+## System Role
+- **Expert Full-Stack Developer**: The AI must assume the role of an expert full-stack developer.
+- **Maintain Existing Scaffold**: Do not re-create the existing `client` and `server` folders or base configuration. Only implement the required enhancements.
+
+---
+
+## User Role & Objectives
+- **Application Features**:
+  - Track wagers with details: **dates**, **wager types** (sports, card games, etc.), **wager amounts**, and **amounts owed**.
+  - Provide user flows to:
+    - **Add and view bets**
+    - **Add and view users** (friends)
+    - **Display a summary** of overall balances (totals owed per user)
+- **Backend API Endpoints**:
+  - `GET /api/users` – Retrieve all users.
+  - `POST /api/users` – Create a new user.
+  - `GET /api/bets` – Retrieve all bets.
+  - `POST /api/bets` – Create a new bet.
+  - *(Optional)* `PUT /api/bets/:id` and `DELETE /api/bets/:id` for editing or removing bets.
+- **Frontend UI Components**:
+  - **Dashboard (Bets)**: List bets with user name, wager type, amount, date, and outcome.
+  - **Add New Bet**: Form with fields for user (dropdown), wager type, wager amount, date, and optional outcome.
+  - **Manage Users**: List of users and a form to add a new user.
+  - **Totals/Owed**: A summary section showing how much each user owes or is owed.
+- **Deployment Requirements**:
+  - Must be production-ready for Render with a separate service for the backend and static deployment for the React client.
+  - Environment variables (e.g., `DATABASE_URL`, `PORT`) must be read from a `.env` file.
+  - Include deployment configurations such as a `Procfile` or `render.yaml` if needed.
+
+---
+
+## Developer Role & Implementation Details
+- **Maintain Existing Structure**:  
+  - The base scaffold created via PowerShell is intact.  
+  - Enhance the existing project with additional endpoints, components, and deployment scripts rather than re-doing the scaffolding.
+  
+- **Backend (Node.js + Express)**:
+  - **Routing & Endpoints**:
+    - Create or update route handlers (in `server/index.js` or under `server/routes/`).
+    - Implement CRUD operations for both users and bets.
+  - **Database Integration**:
+    - Connect to PostgreSQL using the `pg` package.
+    - Use the connection string from `DATABASE_URL` in `.env` (or `.env.example`).
+    - Use async/await with proper try/catch blocks and error handling.
+  - **HTTP Responses**:
+    - Return JSON responses with appropriate HTTP status codes (200, 201, 400, 404, etc.).
+  
+- **Frontend (React)**:
+  - **Component Architecture**:
+    - Build pages/components for **Dashboard (Bets)**, **Add Bet**, **Manage Users**, and a **Summary/Totals** section.
+  - **Data Handling & UI**:
+    - Use React hooks (`useState`, `useEffect`) or data-fetching libraries like Axios/React Query.
+    - Validate inputs and show success/error notifications (e.g., via toast notifications or alerts).
+    - Apply a modern, minimal design using Material UI, Tailwind CSS, or custom CSS.
+  - **Navigation**:
+    - Implement basic navigation (header with links to “Bets” and “Manage Users”).
+  
+- **Deployment on Render**:
+  - **Backend Deployment**:
+    - Ensure the backend service is configured with a `start` script in `package.json` (e.g., `"start": "node index.js"`).
+    - Use Render’s environment variables for configuration.
+    - Optionally, include a `Procfile` or `render.yaml` to define service behavior.
+  - **Frontend Deployment**:
+    - Build the React app using `npm run build` and deploy as a static site.
+  - **Environment Setup**:
+    - Provide clear instructions for configuring `.env` both locally and on Render.
+  
+- **Documentation & Final Checks**:
+  - Update or create `README.md` files (in root and/or subfolders) to include:
+    - **Local Development Instructions**:
+      - For server: `cd server` → `npm install` → `npm run start` (or `npm run dev`).
+      - For client: `cd client` → `npm install` → `npm start`.
+      - How to configure `.env` from `.env.example`.
+    - **Deployment Instructions**:
+      - How to deploy both the Node.js backend and React frontend on Render.
+  - Ensure code cleanliness by using modern best practices (ES6 modules, async/await, modular code) and include inline comments where necessary.
+  - Test the entire flow: adding users, creating bets, listing bets, and verifying amounts owed.
+
+---
+
+## How to Use This Rules File
+1. **Copy the entire text** of this file.
+2. Open **Cursor** and navigate to **Cascade View**.
+3. **Paste** this prompt text and click **Generate**.
+4. Review the generated code and adjust styling or logic as needed.
+5. Test locally (`npm start` in both `server` and `client`) before deploying to Render.
+
+This rules file ensures that the existing project scaffold evolves into a fully functional ledger application with modern UI, complete CRUD endpoints, and Render-ready deployment best practices.

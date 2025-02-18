@@ -1,0 +1,104 @@
+/* App.css – Clean, Modern & Unique */
+
+:root {
+  --bg-color: #1e1e1e;
+  --header-bg: #282c34;
+  --primary-color: #ffffff;
+  --accent-color: #61dafb;
+  --font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+  font-family: var(--font-family);
+  line-height: 1.6;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.App-header {
+  background-color: var(--header-bg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.App-logo:hover {
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: logo-spin 20s linear infinite;
+  }
+}
+
+.App-link {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.App-link:hover,
+.App-link:focus {
+  color: var(--primary-color);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.MuiDialog-paper {
+  background-color: var(--bg-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.MuiDialogTitle-root {
+  background-color: var(--header-bg) !important;
+  color: var(--primary-color) !important;
+}
+
+
+.MuiDialogContent-root {
+  background-color: var(--bg-color) !important;
+  color: var(--primary-color) !important;
+}
+
+
+.MuiDialogActions-root {
+  background-color: var(--header-bg) !important;
+  color: var(--primary-color) !important;
+}
+
+
+  
