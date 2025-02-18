@@ -6,6 +6,7 @@ const pokerRoutes = require('./routes/poker');
 
 const app = express();
 const port = process.env.PORT || 3001;
+const backendUrl = process.env.REACT_APP_BACKEND_URL || '';
 
 // Error logging middleware
 const errorLogger = (err, req, res, next) => {
@@ -83,7 +84,7 @@ const validateBet = (req, res, next) => {
 // Routes
 
 // Get all users
-app.get('/api/users', async (req, res, next) => {
+app.get(`${backendUrl}/api/users`, async (req, res, next) => {
   try {
     const result = await pool.query('SELECT * FROM users ORDER BY name');
     res.json(result.rows);
@@ -93,7 +94,7 @@ app.get('/api/users', async (req, res, next) => {
 });
 
 // Create new user
-app.post('/api/users', validateUser, async (req, res, next) => {
+app.post(`${backendUrl}/api/users`, validateUser, async (req, res, next) => {
   const { name } = req.body;
   try {
     const existingUser = await pool.query('SELECT * FROM users WHERE name = $1', [name.trim()]);
@@ -112,7 +113,7 @@ app.post('/api/users', validateUser, async (req, res, next) => {
 });
 
 // Get all bets with user details
-app.get('/api/bets', async (req, res, next) => {
+app.get(`${backendUrl}/api/bets`, async (req, res, next) => {
   try {
     const result = await pool.query(`
       SELECT 
@@ -131,7 +132,7 @@ app.get('/api/bets', async (req, res, next) => {
 });
 
 // Create new bet
-app.post('/api/bets', validateBet, async (req, res, next) => {
+app.post(`${backendUrl}/api/bets`, validateBet, async (req, res, next) => {
   const { user_id, opponent_id, wager_type, amount, bet_date, outcome } = req.body;
 
   try {
@@ -172,7 +173,7 @@ app.post('/api/bets', validateBet, async (req, res, next) => {
 });
 
 // Get total amounts owed per user
-app.get('/api/users/balances', async (req, res, next) => {
+app.get(`${backendUrl}/api/users/balances`, async (req, res, next) => {
   try {
     const result = await pool.query(`
       WITH bet_outcomes AS (
@@ -214,7 +215,7 @@ app.get('/api/users/balances', async (req, res, next) => {
 });
 
 // Delete a bet
-app.delete('/api/bets/:id', async (req, res, next) => {
+app.delete(`${backendUrl}/api/bets/:id`, async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -241,7 +242,7 @@ app.delete('/api/bets/:id', async (req, res, next) => {
 app.use('/api/poker', pokerRoutes);
 
 // Add this new endpoint
-app.get('/api/users/balance-history', async (req, res, next) => {
+app.get(`${backendUrl}/api/users/balance-history`, async (req, res, next) => {
   try {
     const result = await pool.query(`
       WITH RECURSIVE dates AS (
@@ -291,7 +292,7 @@ app.get('/api/users/balance-history', async (req, res, next) => {
 });
 
 // Add this new endpoint
-app.get('/api/settlements/monthly', async (req, res, next) => {
+app.get(`${backendUrl}/api/settlements/monthly`, async (req, res, next) => {
   try {
     const { month, year } = req.query;
     const result = await pool.query(`
